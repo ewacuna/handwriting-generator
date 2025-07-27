@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://github.com/ewacuna/handwriting-generator/">
+    <img src="public/images/logo.png" alt="App Logo" width="96" height="96">
+  </a>
+</p>
+
 <h3 align="center">Cursive Worksheet Generator</h3>
 
 ## Overview

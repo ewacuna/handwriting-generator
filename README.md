@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/ewacuna/handwriting-generator/">
+  <a href="https://ewacuna.github.io/handwriting-generator/">
     <img src="public/images/logo.png" alt="App Logo" width="96" height="96">
   </a>
 </p>
@@ -8,7 +8,7 @@
 
 ## Overview
 
-Make Your Own Sentence Worksheet
+Make Your Own Sentence Worksheet.
 
 This tool allows users to create customized handwriting practice worksheets instantly. It is designed to help students of all levels improve their penmanship through personalized practice sheets that can be generated.
 

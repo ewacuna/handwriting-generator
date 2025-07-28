@@ -12,6 +12,8 @@ Make Your Own Sentence Worksheet
 
 This tool allows users to create customized handwriting practice worksheets instantly. It is designed to help students of all levels improve their penmanship through personalized practice sheets that can be generated.
 
+#### :sparkles: [See Demo](https://ewacuna.github.io/handwriting-generator/)
+
 ## Technologies Used
 
 - [Angular](https://angular.dev/) web application framework

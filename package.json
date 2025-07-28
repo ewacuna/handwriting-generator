@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-gh-page": "npx ng build -c production --output-path ./docs --base-href https://ewacuna.github.io/handwriting-generator/",
     "dev": "ng serve --port 5100",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,14 +11,24 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { PDFDocument, PDFPage, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Settings } from '../settings/settings';
 
 @Component({
   selector: 'app-generator',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    Settings,
+  ],
   templateUrl: './generator.html',
   styleUrl: './generator.css',
 })
-export class Generator implements OnDestroy {
+export class Generator implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+
   public worksheetForm = new FormGroup({
     lines: new FormArray(
       Array.from(
@@ -27,9 +37,7 @@ export class Generator implements OnDestroy {
       )
     ),
   });
-  public inputPlaceholder = signal<string>(
-    'Enter text to practice (max 30 characters)'
-  );
+  public inputPlaceholder = signal<string>('');
   public isGenerating = signal<boolean>(false);
   public hasAnyInputValue = signal<boolean>(false);
 
@@ -50,6 +58,14 @@ export class Generator implements OnDestroy {
             (ctrl) => !!ctrl.value && ctrl.value.trim().length > 0
           )
         );
+      })
+    );
+  }
+
+  ngOnInit(): void {
+    this.subs.add(
+      this.translate.get('worksheet.maxCharacters').subscribe((res: string) => {
+        this.inputPlaceholder.set(res);
       })
     );
   }
@@ -81,7 +97,7 @@ export class Generator implements OnDestroy {
         URL.revokeObjectURL(url);
       })
       .catch(() => {
-        alert('Error generating PDF. Please try again.');
+        alert(this.translate.instant('notification.warningGeneration'));
       })
       .finally(() => {
         this.isGenerating.set(false);
@@ -165,7 +181,10 @@ export class Generator implements OnDestroy {
 
       return await doc.save();
     } catch (error) {
-      console.error('PDF Generation Error: ', error);
+      console.error(
+        this.translate.instant('notification.pdfErrorGeneration'),
+        error
+      );
       return undefined;
     }
   }

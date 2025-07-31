@@ -1,0 +1,22 @@
+<div class="flex-1 flex justify-center mb-4">
+  <div class="inline-flex rounded-md shadow-sm bg-gray-100" role="group">
+    <button
+      type="button"
+      class="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-primary hover:text-white focus:bg-primary focus:text-white rounded-l-md transition"
+      [class.bg-primary]="currentLanguage() === 'en'"
+      [class.text-white]="currentLanguage() === 'en'"
+      (click)="changeLanguage('en')"
+    >
+      EN
+    </button>
+    <button
+      type="button"
+      class="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-primary hover:text-white focus:bg-primary focus:text-white rounded-r-md transition"
+      [class.bg-primary]="currentLanguage() === 'es'"
+      [class.text-white]="currentLanguage() === 'es'"
+      (click)="changeLanguage('es')"
+    >
+      ES
+    </button>
+  </div>
+</div>

@@ -19,6 +19,7 @@ This tool allows users to create customized handwriting practice worksheets inst
 - [Angular](https://angular.dev/) web application framework
 - [Tailwind CSS](https://tailwindcss.com/) a utility-first CSS framework
 - [PDF-LIB](https://pdf-lib.js.org/) create and modify PDF documents
+- [@ngx-translate](https://github.com/ngx-translate/core) the internationalization (i18n)
 
 ## Development server
 

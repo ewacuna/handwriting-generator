@@ -1,13 +1,15 @@
 <section class="flex flex-col items-center justify-center min-h-screen">
   <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
-    <div class="mb-8 text-center">
+    <header class="mb-4 text-center">
+      <app-settings />
+
       <h1 class="text-2xl font-bold text-primary">
         Cursive Worksheet Generator
       </h1>
       <p class="mt-2 text-gray-600">
-        Create custom cursive handwriting practice worksheets
+        {{ "worksheet.description" | translate }}
       </p>
-    </div>
+    </header>
 
     <form
       class="space-y-4"
@@ -21,7 +23,7 @@
             class="block text-sm text-gray-700 font-bold mb-2"
             [for]="'line' + (i + 1)"
           >
-            Line {{ i + 1 }}
+            {{ "worksheet.pdfLine" | translate : { lineNumber: i + 1 } }}
           </label>
           <div class="relative w-full">
             <input
@@ -49,12 +51,12 @@
         class="w-full py-3 px-4 mb-0 text-sm bg-gray-600 text-white font-semibold rounded-md shadow hover:bg-gray-700 transition disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed disabled:shadow-none disabled:opacity-70"
         [disabled]="isGenerating()"
       >
-        Generate PDF Worksheet
+        {{ "worksheet.btnGeneratePDF" | translate }}
       </button>
 
       @if(!hasAnyInputValue()) {
       <p class="text-center mt-3 text-gray-500 text-sm">
-        Enter text in at least one field to generate a worksheet
+        {{ "worksheet.emptyField" | translate }}
       </p>
       }
     </form>

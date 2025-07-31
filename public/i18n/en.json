@@ -1,0 +1,14 @@
+{
+  "worksheet": {
+    "title": "Cursive Worksheet Generator",
+    "description": "Create custom cursive handwriting practice worksheets",
+    "btnGeneratePDF": "Generate PDF Worksheet",
+    "maxCharacters": "Enter text to practice (max 30 characters)",
+    "pdfLine": "Line {{ lineNumber }}",
+    "emptyField": "Enter text in at least one field to generate a worksheet"
+  },
+  "notification": {
+    "pdfErrorGeneration": "PDF Generation Error: ",
+    "warningGeneration": "Error generating PDF. Please try again."
+  }
+}

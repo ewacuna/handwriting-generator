@@ -30,6 +30,7 @@ export class Generator implements OnInit, OnDestroy {
   private worksheetPdfService = inject(WorksheetPdfService);
 
   private readonly initialLineCount = 6;
+  private readonly linesPerPage = 6;
 
   public worksheetForm = new FormGroup({
     lines: new FormArray(
@@ -51,6 +52,10 @@ export class Generator implements OnInit, OnDestroy {
 
   public get canRemoveLine(): boolean {
     return this.lines.length > this.initialLineCount;
+  }
+
+  public get estimatedPageCount(): number {
+    return Math.ceil(this.lines.length / this.linesPerPage);
   }
 
   constructor() {
@@ -115,6 +120,14 @@ export class Generator implements OnInit, OnDestroy {
 
   public addLine(): void {
     this.lines.push(this.createLineControl());
+  }
+
+  public addLines(count: number): void {
+    Array.from({ length: count }, () => this.addLine());
+  }
+
+  public addPage(): void {
+    this.addLines(this.linesPerPage);
   }
 
   public removeLine(): void {

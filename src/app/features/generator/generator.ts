@@ -31,6 +31,8 @@ export class Generator implements OnInit, OnDestroy {
 
   private readonly initialLineCount = 6;
   private readonly linesPerPage = 6;
+  private readonly previewFontFamily = 'Curve Dashed Preview';
+  private readonly previewFontSrc = 'fonts/curve_dashed.ttf';
 
   public worksheetForm = new FormGroup({
     lines: new FormArray(
@@ -85,6 +87,8 @@ export class Generator implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loadPreviewFont();
+
     this.subs.add(
       this.translate.stream('worksheet.maxCharacters').subscribe((res) => {
         this.inputPlaceholder.set(res);
@@ -170,5 +174,26 @@ export class Generator implements OnInit, OnDestroy {
       nonNullable: true,
       validators: [Validators.maxLength(30)],
     });
+  }
+
+  private loadPreviewFont(): void {
+    if (!('FontFace' in window)) {
+      return;
+    }
+
+    const fontUrl = new URL(this.previewFontSrc, document.baseURI).toString();
+    const previewFont = new FontFace(
+      this.previewFontFamily,
+      `url("${fontUrl}") format("truetype")`,
+    );
+
+    previewFont
+      .load()
+      .then((loadedFont) => {
+        document.fonts.add(loadedFont);
+      })
+      .catch((error) => {
+        console.error('Preview font failed to load:', error);
+      });
   }
 }

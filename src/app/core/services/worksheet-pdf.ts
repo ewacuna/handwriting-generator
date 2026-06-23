@@ -15,6 +15,7 @@ export class WorksheetPdfService {
   private readonly startY = 680;
   private readonly lineSetSpacing = 48;
   private readonly minRowY = 152;
+  private readonly rowsPerPage = 6;
 
   public async generate(lines: string[]): Promise<Uint8Array> {
     const doc: PDFDocument = await PDFDocument.create();
@@ -26,16 +27,19 @@ export class WorksheetPdfService {
       doc.embedFont(StandardFonts.Helvetica),
     ]);
 
+    const totalPages = Math.max(1, Math.ceil(lines.length / this.rowsPerPage));
+    let pageNumber = 1;
     let page = doc.addPage([this.pageWidth, this.pageHeight]);
     this.drawHeader(page, helveticaFont);
-    this.drawFooter(page, helveticaFont);
+    this.drawFooter(page, helveticaFont, pageNumber, totalPages);
     let currentY = this.startY;
 
     for (const text of lines) {
       if (currentY < this.minRowY) {
+        pageNumber += 1;
         page = doc.addPage([this.pageWidth, this.pageHeight]);
         this.drawHeader(page, helveticaFont);
-        this.drawFooter(page, helveticaFont);
+        this.drawFooter(page, helveticaFont, pageNumber, totalPages);
         currentY = this.startY;
       }
 
@@ -76,20 +80,37 @@ export class WorksheetPdfService {
     });
   }
 
-  private drawFooter(page: PDFPage, helveticaFont: PDFFont): void {
+  private drawFooter(
+    page: PDFPage,
+    helveticaFont: PDFFont,
+    pageNumber: number,
+    totalPages: number,
+  ): void {
+    const pageText = this.translate.instant('worksheet.previewPage', {
+      current: pageNumber,
+      total: totalPages,
+    });
     const footerText = this.translate.instant('worksheet.pdfFooter');
     const footerFontSize = 10;
     const footerTextWidth = helveticaFont.widthOfTextAtSize(
       footerText,
       footerFontSize,
     );
-    const footerCenterX = (this.pageWidth - footerTextWidth) / 2;
 
-    page.drawText(footerText, {
-      x: footerCenterX,
+    page.drawText(pageText, {
+      x: 72,
       y: 36,
       size: footerFontSize,
       font: helveticaFont,
+      color: rgb(0.5, 0.5, 0.5),
+    });
+
+    page.drawText(footerText, {
+      x: this.pageWidth - 72 - footerTextWidth,
+      y: 36,
+      size: footerFontSize,
+      font: helveticaFont,
+      color: rgb(0.5, 0.5, 0.5),
     });
   }
 

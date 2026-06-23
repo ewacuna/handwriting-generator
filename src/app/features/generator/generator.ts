@@ -43,6 +43,7 @@ export class Generator implements OnInit, OnDestroy {
   public inputPlaceholder = signal<string>('');
   public isGenerating = signal<boolean>(false);
   public hasAnyInputValue = signal<boolean>(false);
+  public activeView = signal<'edit' | 'preview'>('edit');
 
   private subs = new Subscription();
 
@@ -56,6 +57,19 @@ export class Generator implements OnInit, OnDestroy {
 
   public get estimatedPageCount(): number {
     return Math.ceil(this.lines.length / this.linesPerPage);
+  }
+
+  public get previewPages(): string[][] {
+    const lineValues = this.lines.controls.map((control) =>
+      (control.value ?? '').trim(),
+    );
+    const pages: string[][] = [];
+
+    for (let index = 0; index < lineValues.length; index += this.linesPerPage) {
+      pages.push(lineValues.slice(index, index + this.linesPerPage));
+    }
+
+    return pages;
   }
 
   constructor() {
@@ -141,6 +155,14 @@ export class Generator implements OnInit, OnDestroy {
   public clearLines(): void {
     this.lines.controls.forEach((control) => control.setValue(''));
     this.hasAnyInputValue.set(false);
+  }
+
+  public showEditView(): void {
+    this.activeView.set('edit');
+  }
+
+  public showPreviewView(): void {
+    this.activeView.set('preview');
   }
 
   private createLineControl(): FormControl<string> {

@@ -104,6 +104,36 @@
         </div>
       </div>
 
+      <div
+        class="grid grid-cols-2 rounded-md bg-gray-100 p-1"
+        role="tablist"
+        [attr.aria-label]="'worksheet.viewSelector' | translate"
+      >
+        <button
+          type="button"
+          class="rounded-md px-3 py-2 text-sm font-semibold text-gray-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2"
+          role="tab"
+          [attr.aria-selected]="activeView() === 'edit'"
+          [class.bg-white]="activeView() === 'edit'"
+          [class.shadow-sm]="activeView() === 'edit'"
+          (click)="showEditView()"
+        >
+          {{ "worksheet.edit" | translate }}
+        </button>
+        <button
+          type="button"
+          class="rounded-md px-3 py-2 text-sm font-semibold text-gray-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2"
+          role="tab"
+          [attr.aria-selected]="activeView() === 'preview'"
+          [class.bg-white]="activeView() === 'preview'"
+          [class.shadow-sm]="activeView() === 'preview'"
+          (click)="showPreviewView()"
+        >
+          {{ "worksheet.preview" | translate }}
+        </button>
+      </div>
+
+      @if (activeView() === 'edit') {
       <ng-container formArrayName="lines">
         @for (lineCtrl of lines.controls; track $index; let i = $index) {
         <div class="space-y-1.5 sm:space-y-2">
@@ -127,7 +157,7 @@
               maxlength="30"
               [placeholder]="inputPlaceholder()"
               [formControlName]="i"
-              class="w-full rounded-md border py-3 px-4 pr-16 bg-gray-100 text-base text-gray-800 outline-secondary focus:bg-transparent sm:text-sm"
+              class="w-full rounded-md border py-3 px-4 pr-16 bg-gray-100 text-base text-gray-800 placeholder:text-gray-400 outline-secondary focus:bg-transparent sm:text-sm"
               [class.border-gray-300]="lineCtrl.valid"
               [class.border-red-500]="lineCtrl.invalid"
             />
@@ -156,6 +186,63 @@
       <p class="text-center mt-3 text-gray-500 text-sm">
         {{ "worksheet.emptyField" | translate }}
       </p>
+      }
+      } @else {
+
+      <section class="space-y-3 pt-2" aria-labelledby="worksheet-preview-title">
+        <div class="flex items-center justify-between gap-3">
+          <h2
+            id="worksheet-preview-title"
+            class="text-sm font-bold text-gray-700"
+          >
+            {{ "worksheet.preview" | translate }}
+          </h2>
+          <span class="text-xs font-semibold text-gray-500">
+            {{
+              "worksheet.estimatedPages"
+                | translate : { count: estimatedPageCount }
+            }}
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          @for (pageLines of previewPages; track $index; let pageIndex = $index) {
+          <article
+            class="worksheet-preview-page rounded-md border border-gray-300 bg-white p-4 shadow-sm"
+          >
+            <div class="mb-4 text-center text-[10px] font-semibold text-gray-500">
+              {{ "worksheet.pdfTitle" | translate }}
+            </div>
+
+            <div class="space-y-3">
+              @for (text of pageLines; track $index) {
+              <div class="worksheet-preview-row">
+                <div class="worksheet-preview-line worksheet-preview-line-top"></div>
+                <div class="worksheet-preview-line worksheet-preview-line-middle"></div>
+                <div class="worksheet-preview-line worksheet-preview-line-bottom"></div>
+                @if (text) {
+                <span class="worksheet-preview-text">
+                  {{ text }}
+                </span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="mt-4 flex items-center justify-between text-[10px] text-gray-400">
+              <span>
+                {{
+                  "worksheet.previewPage"
+                    | translate
+                      : { current: pageIndex + 1, total: estimatedPageCount }
+                }}
+              </span>
+              <span>{{ "worksheet.pdfFooter" | translate }}</span>
+            </div>
+          </article>
+          }
+        </div>
+      </section>
       }
 
       <div

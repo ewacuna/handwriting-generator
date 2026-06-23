@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Curve Dashed Preview";
+  src: url("/fonts/curve_dashed.ttf") format("truetype");
+  font-display: swap;
+}
+
+.worksheet-preview-page {
+  aspect-ratio: 8.5 / 11;
+}
+
+.worksheet-preview-row {
+  position: relative;
+  height: 52px;
+}
+
+.worksheet-preview-line {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+.worksheet-preview-line-top {
+  top: 4px;
+  border-top: 1px solid rgb(31 41 55);
+}
+
+.worksheet-preview-line-middle {
+  top: 22px;
+  border-top: 1px dashed rgb(156 163 175);
+}
+
+.worksheet-preview-line-bottom {
+  top: 40px;
+  border-top: 1px solid rgb(31 41 55);
+}
+
+.worksheet-preview-text {
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  color: rgb(17 24 39);
+  font-family: "Curve Dashed Preview", cursive;
+  font-size: 34px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .worksheet-preview-row {
+    height: 58px;
+  }
+
+  .worksheet-preview-line-middle {
+    top: 25px;
+  }
+
+  .worksheet-preview-line-bottom {
+    top: 46px;
+  }
+
+  .worksheet-preview-text {
+    font-size: 40px;
+  }
+}

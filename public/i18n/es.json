@@ -15,6 +15,10 @@
     "addThreeRows": "+3 líneas",
     "addPage": "+ página",
     "clearLines": "Limpiar",
+    "viewSelector": "Selector de vista de la hoja",
+    "edit": "Editar",
+    "preview": "Vista previa",
+    "previewPage": "Página {{ current }} de {{ total }}",
     "pdfTitle": "Generador de Hojas de Trabajo en Cursiva",
     "pdfFooter": "Hecho con cariño para tu práctica de escritura.",
     "emptyField": "Introduce texto en al menos un campo para generar una hoja de trabajo"

@@ -61,18 +61,8 @@ export class Generator implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subs.add(
-      this.translate.get('worksheet.maxCharacters').subscribe((res: string) => {
+      this.translate.stream('worksheet.maxCharacters').subscribe((res) => {
         this.inputPlaceholder.set(res);
-      }),
-    );
-
-    this.subs.add(
-      this.translate.onLangChange.subscribe(() => {
-        this.translate
-          .get('worksheet.maxCharacters')
-          .subscribe((res: string) => {
-            this.inputPlaceholder.set(res);
-          });
       }),
     );
   }

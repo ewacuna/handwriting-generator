@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { PDFDocument, PDFPage, StandardFonts, rgb } from 'pdf-lib';
+import { PDFDocument, PDFFont, PDFPage, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 
 @Injectable({
@@ -12,18 +12,54 @@ export class WorksheetPdfService {
   private readonly fontSrc = './fonts/curve_dashed.ttf';
   private readonly pageWidth = 612;
   private readonly pageHeight = 792;
+  private readonly startY = 680;
+  private readonly lineSetSpacing = 48;
+  private readonly minRowY = 152;
 
   public async generate(lines: string[]): Promise<Uint8Array> {
     const doc: PDFDocument = await PDFDocument.create();
 
     doc.registerFontkit(fontkit);
 
-    const [page, customFont, helveticaFont] = await Promise.all([
-      doc.addPage([this.pageWidth, this.pageHeight]),
+    const [customFont, helveticaFont] = await Promise.all([
       this.fetchFont().then((fontBytes) => doc.embedFont(fontBytes)),
       doc.embedFont(StandardFonts.Helvetica),
     ]);
 
+    let page = doc.addPage([this.pageWidth, this.pageHeight]);
+    this.drawHeader(page, helveticaFont);
+    this.drawFooter(page, helveticaFont);
+    let currentY = this.startY;
+
+    for (const text of lines) {
+      if (currentY < this.minRowY) {
+        page = doc.addPage([this.pageWidth, this.pageHeight]);
+        this.drawHeader(page, helveticaFont);
+        this.drawFooter(page, helveticaFont);
+        currentY = this.startY;
+      }
+
+      const lineSpacing = this.drawTripleLines(page, currentY);
+
+      if (text) {
+        page.drawText(text, {
+          x: 72,
+          y: currentY - lineSpacing - 1,
+          size: 55,
+          font: customFont,
+          color: rgb(0, 0, 0),
+        });
+      }
+
+      currentY -= this.lineSetSpacing;
+      this.drawTripleLines(page, currentY);
+      currentY -= this.lineSetSpacing;
+    }
+
+    return doc.save();
+  }
+
+  private drawHeader(page: PDFPage, helveticaFont: PDFFont): void {
     const headerText = this.translate.instant('worksheet.pdfTitle');
     const headerFontSize = 12;
     const textWidth = helveticaFont.widthOfTextAtSize(
@@ -38,29 +74,9 @@ export class WorksheetPdfService {
       size: headerFontSize,
       font: helveticaFont,
     });
+  }
 
-    const startY = 680;
-    const lineSetSpacing = 48;
-    let currentY = startY;
-
-    for (const text of lines) {
-      const lineSpacing = this.drawTripleLines(page, currentY);
-
-      if (text) {
-        page.drawText(text, {
-          x: 72,
-          y: currentY - lineSpacing - 1,
-          size: 55,
-          font: customFont,
-          color: rgb(0, 0, 0),
-        });
-      }
-
-      currentY -= lineSetSpacing;
-      this.drawTripleLines(page, currentY);
-      currentY -= lineSetSpacing;
-    }
-
+  private drawFooter(page: PDFPage, helveticaFont: PDFFont): void {
     const footerText = this.translate.instant('worksheet.pdfFooter');
     const footerFontSize = 10;
     const footerTextWidth = helveticaFont.widthOfTextAtSize(
@@ -75,8 +91,6 @@ export class WorksheetPdfService {
       size: footerFontSize,
       font: helveticaFont,
     });
-
-    return doc.save();
   }
 
   private async fetchFont(): Promise<ArrayBuffer> {

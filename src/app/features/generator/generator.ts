@@ -29,11 +29,13 @@ export class Generator implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
   private worksheetPdfService = inject(WorksheetPdfService);
 
+  private readonly initialLineCount = 6;
+
   public worksheetForm = new FormGroup({
     lines: new FormArray(
       Array.from(
         { length: 6 },
-        () => new FormControl<string>('', [Validators.maxLength(30)]),
+        () => this.createLineControl(),
       ),
     ),
   });
@@ -45,6 +47,10 @@ export class Generator implements OnInit, OnDestroy {
 
   public get lines(): FormArray {
     return this.worksheetForm.get('lines') as FormArray;
+  }
+
+  public get canRemoveLine(): boolean {
+    return this.lines.length > this.initialLineCount;
   }
 
   constructor() {
@@ -105,5 +111,29 @@ export class Generator implements OnInit, OnDestroy {
       .finally(() => {
         this.isGenerating.set(false);
       });
+  }
+
+  public addLine(): void {
+    this.lines.push(this.createLineControl());
+  }
+
+  public removeLine(): void {
+    if (!this.canRemoveLine) {
+      return;
+    }
+
+    this.lines.removeAt(this.lines.length - 1);
+  }
+
+  public clearLines(): void {
+    this.lines.controls.forEach((control) => control.setValue(''));
+    this.hasAnyInputValue.set(false);
+  }
+
+  private createLineControl(): FormControl<string> {
+    return new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.maxLength(30)],
+    });
   }
 }

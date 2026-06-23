@@ -15,6 +15,10 @@
     "addThreeRows": "+3 rows",
     "addPage": "+ page",
     "clearLines": "Clear",
+    "viewSelector": "Worksheet view selector",
+    "edit": "Edit",
+    "preview": "Preview",
+    "previewPage": "Page {{ current }} of {{ total }}",
     "pdfTitle": "Cursive Worksheet Generator",
     "pdfFooter": "Made with love for your handwriting journey.",
     "emptyField": "Enter text in at least one field to generate a worksheet"

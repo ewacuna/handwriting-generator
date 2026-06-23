@@ -3,6 +3,7 @@
     "title": "Generador de Hojas de Trabajo en Cursiva",
     "description": "Crea hojas de trabajo personalizadas para practicar la escritura en cursiva",
     "btnGeneratePDF": "Generar Hoja de Trabajo en PDF",
+    "generatingPDF": "Generando PDF...",
     "maxCharacters": "Introduce el texto para practicar (máx. 30 caracteres)",
     "maxLengthError": "Usa 30 caracteres o menos.",
     "pdfLine": "Línea {{ lineNumber }}",
@@ -13,5 +14,11 @@
   "notification": {
     "pdfErrorGeneration": "Error de Generación de PDF: ",
     "warningGeneration": "Error al generar el PDF. Por favor, inténtalo de nuevo."
+  },
+  "settings": {
+    "languageSelector": "Selector de idioma",
+    "selectedLanguage": "Idioma seleccionado:",
+    "english": "Inglés",
+    "spanish": "Español"
   }
 }

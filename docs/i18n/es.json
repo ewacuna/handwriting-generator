@@ -4,6 +4,7 @@
     "description": "Crea hojas de trabajo personalizadas para practicar la escritura en cursiva",
     "btnGeneratePDF": "Generar Hoja de Trabajo en PDF",
     "maxCharacters": "Introduce el texto para practicar (máx. 30 caracteres)",
+    "maxLengthError": "Usa 30 caracteres o menos.",
     "pdfLine": "Línea {{ lineNumber }}",
     "emptyField": "Introduce texto en al menos un campo para generar una hoja de trabajo"
   },

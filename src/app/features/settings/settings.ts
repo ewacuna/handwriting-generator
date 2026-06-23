@@ -1,9 +1,9 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './settings.html',
   styleUrl: './settings.css',
 })

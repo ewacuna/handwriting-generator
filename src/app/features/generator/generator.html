@@ -41,7 +41,7 @@
               [placeholder]="inputPlaceholder()"
               [formControlName]="i"
               class="w-full rounded-md border py-3 px-4 pr-16 bg-gray-100 text-gray-800 text-sm outline-secondary focus:bg-transparent"
-              [class.border-transparent]="lineCtrl.valid"
+              [class.border-gray-300]="lineCtrl.valid"
               [class.border-red-500]="lineCtrl.invalid"
             />
             <span
@@ -67,10 +67,15 @@
 
       <button
         type="submit"
-        class="w-full py-3 px-4 mb-0 text-sm bg-gray-600 text-white font-semibold rounded-md shadow hover:bg-gray-700 transition disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed disabled:shadow-none disabled:opacity-70"
+        class="w-full py-3 px-4 mb-0 text-sm bg-gray-600 text-white font-semibold rounded-md shadow hover:bg-gray-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2 disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed disabled:shadow-none disabled:opacity-70"
+        [attr.aria-busy]="isGenerating()"
         [disabled]="isGenerating() || worksheetForm.invalid || !hasAnyInputValue()"
       >
-        {{ "worksheet.btnGeneratePDF" | translate }}
+        @if (isGenerating()) {
+          {{ "worksheet.generatingPDF" | translate }}
+        } @else {
+          {{ "worksheet.btnGeneratePDF" | translate }}
+        }
       </button>
 
       @if(!hasAnyInputValue()) {

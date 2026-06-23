@@ -46,6 +46,7 @@ export class Generator implements OnInit, OnDestroy {
   public isGenerating = signal<boolean>(false);
   public hasAnyInputValue = signal<boolean>(false);
   public activeView = signal<'edit' | 'preview'>('edit');
+  public previewFontLoaded = signal<boolean>(false);
 
   private subs = new Subscription();
 
@@ -191,9 +192,10 @@ export class Generator implements OnInit, OnDestroy {
       .load()
       .then((loadedFont) => {
         document.fonts.add(loadedFont);
+        this.previewFontLoaded.set(true);
       })
-      .catch((error) => {
-        console.error('Preview font failed to load:', error);
+      .catch(() => {
+        this.previewFontLoaded.set(false);
       });
   }
 }

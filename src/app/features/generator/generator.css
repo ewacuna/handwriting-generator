@@ -1,9 +1,3 @@
-@font-face {
-  font-family: "Curve Dashed Preview";
-  src: url("/fonts/curve_dashed.ttf") format("truetype");
-  font-display: swap;
-}
-
 .worksheet-preview-page {
   aspect-ratio: 8.5 / 11;
 }
@@ -41,10 +35,14 @@
   max-width: calc(100% - 8px);
   overflow: hidden;
   color: rgb(17 24 39);
-  font-family: "Curve Dashed Preview", cursive;
+  font-family: cursive;
   font-size: 34px;
   line-height: 1;
   white-space: nowrap;
+}
+
+.worksheet-preview-font-loaded {
+  font-family: "Curve Dashed Preview", cursive;
 }
 
 @media (min-width: 640px) {

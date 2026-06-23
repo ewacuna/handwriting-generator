@@ -221,7 +221,10 @@
                 <div class="worksheet-preview-line worksheet-preview-line-middle"></div>
                 <div class="worksheet-preview-line worksheet-preview-line-bottom"></div>
                 @if (text) {
-                <span class="worksheet-preview-text">
+                <span
+                  class="worksheet-preview-text"
+                  [class.worksheet-preview-font-loaded]="previewFontLoaded()"
+                >
                   {{ text }}
                 </span>
                 }

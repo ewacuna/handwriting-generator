@@ -6,6 +6,8 @@
     "maxCharacters": "Enter text to practice (max 30 characters)",
     "maxLengthError": "Use 30 characters or fewer.",
     "pdfLine": "Line {{ lineNumber }}",
+    "pdfTitle": "Cursive Worksheet Generator",
+    "pdfFooter": "Made with love for your handwriting journey.",
     "emptyField": "Enter text in at least one field to generate a worksheet"
   },
   "notification": {

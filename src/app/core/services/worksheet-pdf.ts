@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { PDFDocument, PDFPage, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 
@@ -6,6 +7,8 @@ import fontkit from '@pdf-lib/fontkit';
   providedIn: 'root',
 })
 export class WorksheetPdfService {
+  private translate = inject(TranslateService);
+
   private readonly fontSrc = './fonts/curve_dashed.ttf';
   private readonly pageWidth = 612;
   private readonly pageHeight = 792;
@@ -21,7 +24,7 @@ export class WorksheetPdfService {
       doc.embedFont(StandardFonts.Helvetica),
     ]);
 
-    const headerText = 'Cursive Worksheet Generator';
+    const headerText = this.translate.instant('worksheet.pdfTitle');
     const headerFontSize = 12;
     const textWidth = helveticaFont.widthOfTextAtSize(
       headerText,
@@ -58,7 +61,7 @@ export class WorksheetPdfService {
       currentY -= lineSetSpacing;
     }
 
-    const footerText = 'Made with love for your handwriting journey.';
+    const footerText = this.translate.instant('worksheet.pdfFooter');
     const footerFontSize = 10;
     const footerTextWidth = helveticaFont.widthOfTextAtSize(
       footerText,

@@ -15,6 +15,7 @@
       class="space-y-4"
       [formGroup]="worksheetForm"
       (ngSubmit)="generateWorksheet()"
+      autocomplete="off"
     >
       <ng-container formArrayName="lines">
         @for (lineCtrl of lines.controls; track $index; let i = $index) {
@@ -30,6 +31,10 @@
               type="text"
               [id]="'line' + (i + 1)"
               [name]="'line' + (i + 1)"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
               maxlength="30"
               [placeholder]="inputPlaceholder()"
               [formControlName]="i"

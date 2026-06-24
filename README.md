@@ -50,11 +50,6 @@ View the app here: [https://ewacuna.github.io/handwriting-generator/](https://ew
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js
-- npm
-
 ### Installation
 
 ```bash
@@ -69,53 +64,6 @@ npm run dev
 
 Open [http://localhost:5100/](http://localhost:5100/) in your browser. The development server reloads automatically when source files change.
 
-## Available Scripts
-
-```bash
-npm run dev
-```
-
-Starts the local development server on port `5100`.
-
-```bash
-npm run build
-```
-
-Builds the app for production.
-
-```bash
-npm run build-gh-page
-```
-
-Builds the production app into `docs/` with the GitHub Pages base href.
-
-```bash
-npm test
-```
-
-Runs the Angular test suite.
-
-## Project Structure
-
-```text
-src/app/features/generator/     Worksheet editor, preview, and PDF action
-src/app/features/settings/      Language selector
-src/app/core/services/          PDF generation service
-public/fonts/                   Custom worksheet font
-public/i18n/                    English and Spanish translations
-public/images/                  App images and logo
-```
-
-## Deployment
-
-The project includes a GitHub Pages build script:
-
-```bash
-npm run build-gh-page
-```
-
-This writes the production build to `docs/`, using the configured GitHub Pages URL as the base href.
-
 ## License
 
-This project is licensed under the terms in [LICENSE](LICENSE).
+This project is licensed under the [MIT LICENSE](LICENSE).

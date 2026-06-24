@@ -34,6 +34,7 @@ View the app here: [https://ewacuna.github.io/handwriting-generator/](https://ew
 - Add, remove, and clear worksheet rows.
 - Add a full extra page of practice rows in one click.
 - Preview worksheet pages before generating the PDF.
+- Icon-enhanced controls for row editing, preview, language, and PDF actions.
 - Enforces a 30-character limit per row to keep text readable on the worksheet.
 - Supports English and Spanish UI text with saved language preference.
 - Uses a custom dashed cursive font for practice text.
@@ -42,6 +43,7 @@ View the app here: [https://ewacuna.github.io/handwriting-generator/](https://ew
 
 - [Angular](https://angular.dev/) web application framework
 - [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
+- [Lucide Angular](https://lucide.dev/guide/packages/angular) for interface icons
 - [pdf-lib](https://pdf-lib.js.org/) for creating PDF worksheets in the browser
 - [@ngx-translate](https://github.com/ngx-translate/core) for internationalization
 - [@pdf-lib/fontkit](https://github.com/Hopding/fontkit) for embedding the cursive font

@@ -10,6 +10,17 @@ import {
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  LucideEye,
+  LucideFileDown,
+  LucideFilePlus,
+  LucideLoaderCircle,
+  LucideMinus,
+  LucidePencil,
+  LucidePlus,
+  LucideRows3,
+  LucideTrash2,
+} from '@lucide/angular';
 import { Settings } from '../settings/settings';
 import { WorksheetPdfService } from '../../core/services/worksheet-pdf';
 
@@ -21,6 +32,15 @@ import { WorksheetPdfService } from '../../core/services/worksheet-pdf';
     ReactiveFormsModule,
     TranslateModule,
     Settings,
+    LucideEye,
+    LucideFileDown,
+    LucideFilePlus,
+    LucideLoaderCircle,
+    LucideMinus,
+    LucidePencil,
+    LucidePlus,
+    LucideRows3,
+    LucideTrash2,
   ],
   templateUrl: './generator.html',
   styleUrl: './generator.css',

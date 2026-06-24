@@ -1,9 +1,10 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LucideLanguages } from '@lucide/angular';
 
 @Component({
   selector: 'app-settings',
-  imports: [TranslateModule],
+  imports: [TranslateModule, LucideLanguages],
   templateUrl: './settings.html',
   styleUrl: './settings.css',
 })

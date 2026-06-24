@@ -1,12 +1,18 @@
 <div class="flex-1 flex justify-center mb-4">
   <div
-    class="inline-flex rounded-md shadow-sm bg-gray-100"
+    class="inline-flex items-center rounded-md shadow-sm bg-gray-100"
     role="group"
     [attr.aria-label]="'settings.languageSelector' | translate"
   >
+    <span
+      class="inline-flex h-9 items-center justify-center border-r border-gray-300 px-2 text-gray-500"
+      aria-hidden="true"
+    >
+      <svg lucideLanguages size="16"></svg>
+    </span>
     <button
       type="button"
-      class="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2 rounded-l-md transition"
+      class="px-3 py-2 text-sm font-medium text-gray-700 hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 focus-visible:ring-offset-2 transition"
       [attr.aria-label]="'settings.english' | translate"
       [attr.aria-pressed]="currentLanguage() === 'en'"
       [class.bg-primary]="currentLanguage() === 'en'"
